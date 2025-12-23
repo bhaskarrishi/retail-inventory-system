@@ -363,7 +363,7 @@ def read_root():
                         });
 
                         if (!response.ok) {
-                            throw new Error('Failed to delete product');
+                            throw new Error(`Failed to delete product (Status: ${response.status})`);
                         }
 
                         showMessage('✅ Product deleted successfully!', 'success');
