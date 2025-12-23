@@ -2,7 +2,6 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from typing import List
-import os
 
 from . import models, schemas, crud
 from .db import Base, engine, get_db
