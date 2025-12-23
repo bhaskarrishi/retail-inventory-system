@@ -215,7 +215,7 @@ def read_root():
                 <div id="message-area"></div>
                 
                 <div class="controls">
-                    <button class="btn-primary" onclick="loadProducts()">🔄 Refresh Products</button>
+                    <button class="btn-primary" id="refresh-btn">🔄 Refresh Products</button>
                 </div>
                 
                 <div id="products-container">
@@ -233,8 +233,8 @@ def read_root():
                         This action cannot be undone.
                     </div>
                     <div class="modal-footer">
-                        <button class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
-                        <button class="btn-danger" onclick="confirmDelete()">Delete Product</button>
+                        <button class="btn-secondary" id="cancel-delete-btn">Cancel</button>
+                        <button class="btn-danger" id="confirm-delete-btn">Delete Product</button>
                     </div>
                 </div>
             </div>
@@ -246,6 +246,21 @@ def read_root():
                 // Load products on page load
                 document.addEventListener('DOMContentLoaded', function() {
                     loadProducts();
+                    
+                    // Attach event listener to refresh button
+                    document.getElementById('refresh-btn').addEventListener('click', loadProducts);
+                    
+                    // Attach event listeners to modal buttons
+                    document.getElementById('cancel-delete-btn').addEventListener('click', closeDeleteModal);
+                    document.getElementById('confirm-delete-btn').addEventListener('click', confirmDelete);
+                    
+                    // Close modal when clicking outside of it
+                    window.addEventListener('click', function(event) {
+                        const modal = document.getElementById('deleteModal');
+                        if (event.target === modal) {
+                            closeDeleteModal();
+                        }
+                    });
                 });
 
                 async function loadProducts() {
@@ -381,14 +396,6 @@ def read_root():
                     div.textContent = text;
                     return div.innerHTML;
                 }
-
-                // Close modal when clicking outside of it
-                window.addEventListener('click', function(event) {
-                    const modal = document.getElementById('deleteModal');
-                    if (event.target === modal) {
-                        closeDeleteModal();
-                    }
-                });
             </script>
         </body>
     </html>
