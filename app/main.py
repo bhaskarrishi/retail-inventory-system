@@ -303,7 +303,7 @@ def read_root():
                                 <td>$${product.price.toFixed(2)}</td>
                                 <td>${product.quantity}</td>
                                 <td>
-                                    <button class="btn-danger" onclick="showDeleteModal(${product.id}, '${escapeHtml(product.name)}')">
+                                    <button class="btn-danger delete-btn" data-product-id="${product.id}" data-product-name="${escapeHtml(product.name)}">
                                         🗑️ Delete
                                     </button>
                                 </td>
@@ -317,6 +317,15 @@ def read_root():
                     `;
 
                     container.innerHTML = html;
+                    
+                    // Attach event listeners to delete buttons
+                    document.querySelectorAll('.delete-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const productId = this.getAttribute('data-product-id');
+                            const productName = this.getAttribute('data-product-name');
+                            showDeleteModal(productId, productName);
+                        });
+                    });
                 }
 
                 function showDeleteModal(productId, productName) {
@@ -374,12 +383,12 @@ def read_root():
                 }
 
                 // Close modal when clicking outside of it
-                window.onclick = function(event) {
+                window.addEventListener('click', function(event) {
                     const modal = document.getElementById('deleteModal');
                     if (event.target === modal) {
                         closeDeleteModal();
                     }
-                }
+                });
             </script>
         </body>
     </html>
