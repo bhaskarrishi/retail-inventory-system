@@ -312,13 +312,13 @@ def read_root():
                     products.forEach(product => {
                         html += `
                             <tr>
-                                <td>${product.id}</td>
+                                <td>${escapeHtml(String(product.id))}</td>
                                 <td>${escapeHtml(product.name)}</td>
                                 <td>${escapeHtml(product.sku)}</td>
-                                <td>$${product.price.toFixed(2)}</td>
-                                <td>${product.quantity}</td>
+                                <td>$${escapeHtml(product.price.toFixed(2))}</td>
+                                <td>${escapeHtml(String(product.quantity))}</td>
                                 <td>
-                                    <button class="btn-danger delete-btn" data-product-id="${product.id}" data-product-name="${escapeHtml(product.name)}">
+                                    <button class="btn-danger delete-btn" data-product-id="${escapeHtml(String(product.id))}" data-product-name="${escapeHtml(product.name)}">
                                         🗑️ Delete
                                     </button>
                                 </td>
