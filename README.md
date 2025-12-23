@@ -1,2 +1,2 @@
 # retail-inventory-system
-Desktop application for retail store inventory management
+Desktop application for retail store inventory management System
